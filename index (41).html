@@ -64,7 +64,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 
 .start-btn{ display:block; width:100%; max-width:220px; padding:14px 20px; border-radius:16px; background:linear-gradient(90deg, #22c9ff, #7c3aed); color:white; text-decoration:none; font-weight:bold; font-size:15px; text-align:center; box-shadow:0 8px 25px rgba(67,56,202,.4); border:none; cursor:pointer; }
 
-/* ================= POSTS PAGE (ระบบโพสต์) ================= */
+/* ================= POSTS PAGE ================= */
 .posts-container{ max-width:700px; margin:20px auto; padding:0 15px 40px; }
 .create-post-card{ background:#12154c; border:1px solid rgba(133,95,255,.4); border-radius:20px; padding:20px; margin-bottom:20px; }
 .create-post-card textarea{ width:100%; background:#080b35; border:1px solid #343785; border-radius:12px; padding:12px; color:white; font-size:14px; outline:none; resize:none; height:80px; margin-bottom:10px; }
@@ -78,8 +78,6 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 .post-img-wrapper{ position:relative; display:inline-block; max-width:100%; margin-bottom:10px; }
 .post-img{ max-width:100%; border-radius:10px; max-height:300px; object-fit:cover; display:block; cursor:pointer; }
 .post-actions{ display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,.08); padding-top:10px; font-size:13px; color:#aaaed0; }
-.post-action-btn{ background:none; border:none; color:#aaaed0; cursor:pointer; display:flex; align-items:center; gap:5px; font-size:13px; }
-.post-action-btn:hover{ color:#22c9ff; }
 
 .download-img-btn{
     position: absolute; bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.75); color: white;
@@ -132,8 +130,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 .msg-bubble{ padding:12px 16px; border-radius:18px; font-size:15px; line-height:1.4; word-break:break-word; position:relative; width:100%; }
 .msg-row.me .msg-bubble{ background:linear-gradient(135deg, #006f9f, #4c1d95); border-bottom-right-radius:4px; }
 .msg-row.other .msg-bubble{ background:#20256e; border-bottom-left-radius:4px; }
-.chat-msg-img-container{ position:relative; display:inline-block; margin-top:4px; }
-.chat-msg-img{ max-width:200px; max-height:200px; border-radius:10px; display:block; object-fit: cover; cursor: pointer; }
+.chat-msg-img{ max-width:200px; max-height:200px; border-radius:10px; display:block; margin-top:4px; object-fit: cover; cursor: pointer; }
 .reply-preview-box{ background:rgba(0,0,0,0.25); border-left:3px solid #22c9ff; padding:6px 10px; border-radius:6px; margin-bottom:6px; font-size:12px; color:#ddd; }
 .reply-preview-box .reply-user{ font-weight:bold; color:#22c9ff; margin-bottom:2px; }
 .msg-menu-btn{ background:none; border:none; color:#a3a8d1; font-size:18px; padding:4px 8px; cursor:pointer; border-radius:50%; opacity:0.6; transition:.2s; }
@@ -200,16 +197,8 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
     .logo span { display: none; }
     nav a span { display: none; }
     nav a { padding: 8px 10px; font-size: 16px; }
-    
-    .chat-wrapper {
-        height: calc(100vh - 80px);
-        border-radius: 12px;
-    }
-    
-    .chat-input input[type="text"] {
-        padding: 10px 14px;
-        font-size: 14px;
-    }
+    .chat-wrapper { height: calc(100vh - 80px); border-radius: 12px; }
+    .chat-input input[type="text"] { padding: 10px 14px; font-size: 14px; }
 }
 
 @media (min-width: 768px) {
@@ -238,8 +227,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
         <a onclick="showPage('home')" id="navHome" class="active">🏠 <span>หน้าแรก</span></a>
         <a onclick="showPage('posts')" id="navPosts">📰 <span>โพสต์</span></a>
         <a onclick="showPage('friends')" id="navFriends">👥 <span>เพื่อน</span></a>
-        <a onclick="showPage('searchFriends')" id="navSearchFriends">🔍 <span>ค้นหาและแอด</span></a>
-        <a onclick="showPage('friendCamera')" id="navFriendCamera">📷 <span>กล้องรับเพื่อน</span></a>
+        <a onclick="showPage('searchFriends')" id="navSearchFriends">🔍 <span>ค้นหาผู้ใช้</span></a>
         <a onclick="showPage('chat')" id="navChat">💬 <span>แชท</span></a>
         <a onclick="showPage('profile')" id="navProfile">👤 <span>โปรไฟล์</span></a>
     </nav>
@@ -261,14 +249,14 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
             <h2>ถาม-ตอบ แลกเปลี่ยนความรู้ และเพิ่มเพื่อนพูดคุย</h2>
             <p>ไม่ว่าจะเป็นการบ้าน การเรียน หรือเพื่อนคุยแก้เหงา มาร่วมสร้างสังคมการเรียนรู้ไปด้วยกันสำหรับชาวมหรรณพาราม</p>
             <div class="hero-buttons">
-                <button onclick="showPage('posts')" class="start-btn" style="background:linear-gradient(90deg, #f59e0b, #ef4444); max-width:240px;">📰 ดูโพสต์สาธารณะ</button>
+                <button onclick="requestNotificationPermission()" class="start-btn" style="background:linear-gradient(90deg, #f59e0b, #ef4444); max-width:240px;">🔔 เปิดรับแจ้งเตือน</button>
                 <button onclick="showPage('chat')" class="start-btn">💬 เริ่มต้นพูดคุยเลย</button>
             </div>
         </div>
     </section>
 </div>
 
-<!-- ================= POSTS PAGE (ระบบโพสต์) ================= -->
+<!-- ================= POSTS PAGE ================= -->
 <div id="pagePosts" class="page-section">
     <div class="posts-container">
         <div class="create-post-card">
@@ -313,23 +301,6 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
         </div>
 
         <div class="users-grid" id="globalSearchGrid"></div>
-    </div>
-</div>
-
-<!-- ================= FRIEND CAMERA & REQUESTS PAGE ================= -->
-<div id="pageFriendCamera" class="page-section">
-    <div class="friends-container" style="text-align: center;">
-        <h2 style="margin-bottom:5px;">📷 กล้องรับเพื่อน & คำขอ</h2>
-        <p style="color:#aaaed0; margin-bottom:20px; font-size:13px;">สแกน QR Code หรือตรวจสอบคำขอรับเพื่อนด่วน</p>
-        
-        <div style="background:#080b35; border:2px dashed #7c3aed; border-radius:16px; padding:30px; margin-bottom:20px; max-width:400px; margin-left:auto; margin-right:auto;">
-            <div style="font-size:40px; margin-bottom:10px;">📷</div>
-            <p style="color:#ddd; font-size:14px; margin-bottom:15px;">เปิดกล้องเพื่อสแกนรหัสเพิ่มเพื่อน</p>
-            <button class="start-btn" style="margin: 0 auto; max-width: 180px; padding: 10px;" onclick="alert('เปิดใช้งานกล้องจำลองเรียบร้อย')">เปิดกล้องสแกน</button>
-        </div>
-
-        <h3 style="text-align: left; font-size: 16px; color: #22c9ff; margin-bottom: 10px;">📋 คำขอเป็นเพื่อนที่รอการอนุมัติ</h3>
-        <div class="users-grid" id="cameraRequestsGrid"></div>
     </div>
 </div>
 
@@ -480,7 +451,6 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 
     const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2322c9ff'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
     const SCHOOL_LOGO_URL = "https://i.ibb.co/3ykL8w4/school-logo.png";
-    const AI_BOT_NAME = "AI_Assistant";
 
     let currentUser = localStorage.getItem("activeUser") || null;
     let activeChatFriend = null;
@@ -492,7 +462,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
     let tempPostImage = null;
 
     window.showPage = function(pageId){
-        if((pageId === 'friends' || pageId === 'chat' || pageId === 'profile' || pageId === 'searchFriends' || pageId === 'friendCamera') && !currentUser){
+        if((pageId === 'friends' || pageId === 'chat' || pageId === 'profile' || pageId === 'searchFriends') && !currentUser){
             alert("กรุณาเข้าสู่ระบบก่อนใช้งานครับ");
             openAuth('login');
             return;
@@ -516,16 +486,11 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
             document.getElementById('pageSearchFriends').classList.add('active');
             document.getElementById('navSearchFriends').classList.add('active');
             renderGlobalSearchUsers();
-        } else if(pageId === 'friendCamera'){
-            document.getElementById('pageFriendCamera').classList.add('active');
-            document.getElementById('navFriendCamera').classList.add('active');
-            renderFriendRequestsOnly();
         } else if(pageId === 'chat'){
             document.getElementById('pageChat').classList.add('active');
             document.getElementById('navChat').classList.add('active');
             renderSidebarFriends();
             toggleMobileChatView('sidebar');
-            requestAutoNotificationPermission();
         } else if(pageId === 'profile'){
             document.getElementById('pageProfile').classList.add('active');
             document.getElementById('navProfile').classList.add('active');
@@ -543,7 +508,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
                 document.getElementById('chatMain').style.display = 'none';
             }
         }
-    }
+    };
 
     window.openAuth = function(type){
         document.getElementById("authOverlay").classList.add("active");
@@ -645,14 +610,22 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
         }
     }
 
-    function requestAutoNotificationPermission(){
-        if ("Notification" in window && Notification.permission !== "granted") {
-            Notification.requestPermission();
+    window.requestNotificationPermission = function(){
+        if (!("Notification" in window)) {
+            alert("เบราว์เซอร์นี้ไม่รองรับการแจ้งเตือนเดสก์ท็อป");
+            return;
         }
-    }
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                alert("เปิดระบบแจ้งเตือนสำเร็จเรียบร้อย!");
+            } else {
+                alert("คุณปิดการอนุญาตแจ้งเตือน");
+            }
+        });
+    };
 
     function showDesktopNotification(sender, text){
-        if ("Notification" in window && Notification.permission === "granted" && document.hidden) {
+        if (Notification.permission === "granted" && document.hidden) {
             new Notification(`ข้อความใหม่จาก ${sender}`, {
                 body: text,
                 icon: SCHOOL_LOGO_URL
@@ -671,36 +644,19 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
             const reqs = snapshot.val() || {};
             const count = Object.keys(reqs).length;
             if(!isFirstLoad && count > 0){
-                alert("👥 มีผู้ส่งคำขอเป็นเพื่อนมาหาคุณ! ไปที่หน้า 'เพื่อน' หรือ 'กล้องรับเพื่อน' เพื่อตรวจสอบได้เลย");
+                alert("👥 มีผู้ส่งคำขอเป็นเพื่อนมาหาคุณ! ไปที่หน้า 'เพื่อน' เพื่อตรวจสอบได้เลย");
             }
             isFirstLoad = false;
         });
     }
 
-    window.downloadImage = function(url, filename = 'downloaded-image.jpg') {
-        fetch(url)
-            .then(response => response.blob())
-            .then(blob => {
-                const blobUrl = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = blobUrl;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(blobUrl);
-            })
-            .catch(() => {
-                window.open(url, '_blank');
-            });
-    };
-
-    window.previewPostImage = function(event){
-        const file = event.target.files[0];
+    /* ================= POSTS LOGIC ================= */
+    window.previewPostImage = function(e){
+        const file = e.target.files[0];
         if(!file) return;
         const reader = new FileReader();
-        reader.onload = function(e){
-            tempPostImage = e.target.result;
+        reader.onload = function(evt){
+            tempPostImage = evt.target.result;
             document.getElementById("postImgPreview").src = tempPostImage;
             document.getElementById("postImagePreviewContainer").style.display = "block";
         };
@@ -709,161 +665,118 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 
     window.clearPostImage = function(){
         tempPostImage = null;
-        document.getElementById("postImagePreviewContainer").style.display = "none";
         document.getElementById("postImageInput").value = "";
+        document.getElementById("postImagePreviewContainer").style.display = "none";
     };
 
     window.createNewPost = function(){
-        if(!currentUser){
-            alert("กรุณาเข้าสู่ระบบก่อนโพสต์ครับ");
-            openAuth('login');
-            return;
-        }
+        if(!currentUser){ alert("กรุณาเข้าสู่ระบบก่อนโพสต์ครับ"); openAuth('login'); return; }
         const text = document.getElementById("postTextInput").value.trim();
-        if(!text && !tempPostImage){
-            alert("กรุณากรอกข้อความหรือแนบรูปภาพอย่างน้อย 1 อย่างครับ");
-            return;
-        }
+        if(!text && !tempPostImage){ alert("กรุณาพิมพ์ข้อความหรือแนบรูปภาพ"); return; }
 
-        const newPostData = {
+        push(ref(db, "posts"), {
             author: currentUser,
-            text: text || "",
-            image: tempPostImage || "",
+            text: text,
+            image: tempPostImage || null,
             timestamp: Date.now()
-        };
-
-        const newPostRef = push(ref(db, "posts"), newPostData);
-        
-        setTimeout(() => {
-            let aiReplyText = "สวัสดีครับ AI_Assistant ยินดีช่วยเหลือครับ จากเรื่องที่คุณโพสต์ ลองตรวจสอบข้อมูลเบื้องต้นหรือปรึกษาคุณครูเพิ่มเติมดูได้นะครับ!";
-            if(text.includes("การบ้าน") || text.includes("โจทย์") || text.includes("วิชา")){
-                aiReplyText = "สู้ๆ นะครับสำหรับการบ้าน! คำตอบที่ถูกต้องควรทบทวนสูตรหรือเนื้อหาในบทเรียนที่เรียนมา หรือลองมาคุยแชร์วิธีทำกับเพื่อนๆ ในห้องแชทได้ครับ";
-            }
-            push(ref(db, `posts/${newPostRef.key}/comments`), {
-                author: AI_BOT_NAME,
-                text: aiReplyText,
-                timestamp: Date.now()
-            });
-        }, 1200);
+        });
 
         document.getElementById("postTextInput").value = "";
         clearPostImage();
-        alert("โพสต์เรื่องราวเรียบร้อยแล้ว!");
-    };
-
-    window.addCommentToPost = function(postId){
-        if(!currentUser){
-            alert("กรุณาเข้าสู่ระบบก่อนคอมเมนต์");
-            openAuth('login');
-            return;
-        }
-        const inputElem = document.getElementById(`comment-input-${postId}`);
-        const commentText = inputElem.value.trim();
-        if(!commentText) return;
-
-        push(ref(db, `posts/${postId}/comments`), {
-            author: currentUser,
-            text: commentText,
-            timestamp: Date.now()
-        });
-        inputElem.value = "";
+        alert("โพสต์ข้อความเรียบร้อย!");
     };
 
     function renderPostsFeed(){
-        const feedArea = document.getElementById("postsFeedArea");
+        const feed = document.getElementById("postsFeedArea");
         onValue(ref(db, "posts"), (snapshot) => {
-            feedArea.innerHTML = "";
-            const posts = snapshot.val() || {};
-            const postKeys = Object.keys(posts).reverse();
-            const twoDaysMs = 2 * 24 * 60 * 60 * 1000; 
-            const currentTime = Date.now();
+            feed.innerHTML = "";
+            const postsObj = snapshot.val() || {};
+            const postKeys = Object.keys(postsObj).reverse();
 
-            let activePostsCount = 0;
+            if(postKeys.length === 0){
+                feed.innerHTML = `<div style="text-align:center; color:#aaa; font-size:14px; padding:30px;">ยังไม่มีโพสต์ในขณะนี้ เป็นคนแรกที่โพสต์เลย!</div>`;
+                return;
+            }
 
-            postKeys.forEach(postId => {
-                const post = posts[postId];
-                
-                if(currentTime - post.timestamp > twoDaysMs){
-                    remove(ref(db, `posts/${postId}`));
-                    return;
-                }
-
-                activePostsCount++;
+            postKeys.forEach(pId => {
+                const post = postsObj[pId];
                 get(child(ref(db), `users/${post.author}/avatar`)).then((avatarSnap) => {
-                    const avatar = avatarSnap.exists() ? avatarSnap.val() : DEFAULT_AVATAR;
-                    
-                    const card = document.createElement("div");
-                    card.className = "post-card";
-                    
-                    let commentsHTML = "";
-                    const comments = post.comments || {};
-                    Object.keys(comments).forEach(cId => {
-                        const com = comments[cId];
-                        const comAvatar = com.author === AI_BOT_NAME ? SCHOOL_LOGO_URL : DEFAULT_AVATAR;
-                        commentsHTML += `
-                            <div class="comment-item">
-                                <img src="${comAvatar}" class="comment-avatar" onclick="viewUserProfile('${com.author}')">
-                                <div class="comment-body">
-                                    <span class="comment-user" onclick="viewUserProfile('${com.author}')">${com.author}</span>
-                                    <div class="comment-text">${com.text}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
+                    const avatarUrl = avatarSnap.exists() ? avatarSnap.val() : DEFAULT_AVATAR;
+                    const dateStr = new Date(post.timestamp).toLocaleString('th-TH');
 
-                    let imageHTML = "";
-                    if(post.image){
-                        imageHTML = `
-                            <div class="post-img-wrapper">
-                                <img src="${post.image}" class="post-img" onclick="openImageModal('${post.image}')">
-                                <button class="download-img-btn" onclick="downloadImage('${post.image}', 'post-image_${postId}.jpg')">⬇️ ดาวน์โหลด</button>
-                            </div>
-                        `;
+                    const postCard = document.createElement("div");
+                    postCard.className = "post-card";
+
+                    let imgHTML = post.image ? `
+                        <div class="post-img-wrapper">
+                            <img src="${post.image}" class="post-img" onclick="openImageModal('${post.image}')">
+                            <button class="download-img-btn" onclick="downloadPostImage('${post.image}')">📥 ดาวน์โหลด</button>
+                        </div>
+                    ` : '';
+
+                    let commentsHTML = "";
+                    if(post.comments){
+                        Object.keys(post.comments).forEach(cId => {
+                            const comment = post.comments[cId];
+                            commentsHTML += `
+                                <div class="comment-item">
+                                    <div class="comment-body">
+                                        <span class="comment-user" onclick="viewUserProfile('${comment.author}')">${comment.author}</span>
+                                        <div class="comment-text">${comment.text}</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
                     }
 
-                    card.innerHTML = `
+                    postCard.innerHTML = `
                         <div class="post-header">
-                            <img src="${avatar}" class="post-avatar" onclick="viewUserProfile('${post.author}')">
+                            <img src="${avatarUrl}" class="post-avatar" onclick="viewUserProfile('${post.author}')">
                             <div class="post-user-info">
                                 <h4 onclick="viewUserProfile('${post.author}')">${post.author}</h4>
-                                <span>${new Date(post.timestamp).toLocaleString('th-TH')} (โพสต์จะหายไปใน 2 วัน)</span>
+                                <span>${dateStr}</span>
                             </div>
                         </div>
-                        ${post.text ? `<div class="post-content">${post.text}</div>` : ''}
-                        ${imageHTML}
-                        <div class="post-actions">
-                            ${post.author === currentUser ? `<button class="post-action-btn" onclick="deletePost('${postId}')">🗑️ ลบโพสต์</button>` : '<div></div>'}
-                        </div>
+                        <div class="post-content">${post.text || ''}</div>
+                        ${imgHTML}
                         <div class="post-comments-section">
-                            <div style="font-size:12px; color:#22c9ff; margin-bottom:6px;">💬 ความเห็นและการช่วยเหลือจากเพื่อนๆ :</div>
-                            <div id="comments-list-${postId}">${commentsHTML}</div>
+                            <div id="comments-container-${pId}">${commentsHTML}</div>
                             <div class="comment-input-box">
-                                <input type="text" id="comment-input-${postId}" placeholder="พิมพ์ความคิดเห็นหรือบอกคำตอบที่ถูก..." onkeydown="if(event.key==='Enter') addCommentToPost('${postId}')">
-                                <button class="comment-send-btn" onclick="addCommentToPost('${postId}')">ส่ง</button>
+                                <input type="text" id="comment-input-${pId}" placeholder="เขียนความคิดเห็น..." onkeydown="if(event.key==='Enter') addPostComment('${pId}')">
+                                <button class="comment-send-btn" onclick="addPostComment('${pId}')">ส่ง</button>
                             </div>
                         </div>
                     `;
-                    feedArea.appendChild(card);
+                    feed.appendChild(postCard);
                 });
             });
-
-            if(activePostsCount === 0){
-                feedArea.innerHTML = `<div style="text-align:center; color:#aaa; padding:30px;">ยังไม่มีโพสต์ในระบบ หรือโพสต์ทั้งหมดหมดอายุ (เกิน 2 วัน) แล้ว!</div>`;
-            }
         });
     }
 
-    window.deletePost = function(postId){
-        if(confirm("คุณต้องการลบโพสต์นี้ใช่หรือไม่?")){
-            remove(ref(db, `posts/${postId}`));
-        }
+    window.addPostComment = function(postId){
+        if(!currentUser){ alert("กรุณาเข้าสู่ระบบก่อนเขียนความคิดเห็น"); openAuth('login'); return; }
+        const input = document.getElementById(`comment-input-${postId}`);
+        const text = input.value.trim();
+        if(!text) return;
+
+        push(ref(db, `posts/${postId}/comments`), {
+            author: currentUser,
+            text: text,
+            timestamp: Date.now()
+        });
+        input.value = "";
+    };
+
+    window.downloadPostImage = function(url){
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `student-chat-${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     };
 
     window.viewUserProfile = function(username){
-        if(username === AI_BOT_NAME){
-            alert("นี่คือบัญชีระบบ AI_Assistant ที่คอยช่วยเหลืออัตโนมัติครับ!");
-            return;
-        }
         get(child(ref(db), `users/${username}`)).then((snapshot) => {
             if(snapshot.exists()){
                 const data = snapshot.val();
@@ -880,7 +793,9 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
     };
 
     window.openActiveFriendProfile = function(){
-        if(activeChatFriend) viewUserProfile(activeChatFriend);
+        if(activeChatFriend){
+            viewUserProfile(activeChatFriend);
+        }
     };
 
     window.renderUsers = function(){
@@ -959,7 +874,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 
     window.renderGlobalSearchUsers = function(){
         const grid = document.getElementById("globalSearchGrid");
-        const searchText = document.getElementById("globalSearchInput") ? document.getElementById("globalSearchInput").value.toLowerCase() : "";
+        const searchText = document.getElementById("globalSearchInput").value.toLowerCase();
         
         onValue(ref(db, `users`), (snapshot) => {
             grid.innerHTML = "";
@@ -980,65 +895,13 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
                             <p>${usersData[username].status || ''}</p>
                         </div>
                     </div>
-                    <button class="btn-friend btn-add" onclick="sendFriendReqFromSearch('${username}')">
-                        + ส่งคำขอ
+                    <button class="btn-friend btn-add" onclick="set(ref(db, 'requests/${username}/${currentUser}'), true); alert('ส่งคำขอเรียบร้อย!');">
+                        + เพิ่มเพื่อน
                     </button>
                 `;
                 grid.appendChild(card);
             });
-        }, { onlyOnce: true });
-    };
-
-    window.sendFriendReqFromSearch = function(username){
-        set(ref(db, `requests/${username}/${currentUser}`), true);
-        alert(`ส่งคำขอเป็นเพื่อนไปยัง ${username} แล้ว`);
-    };
-
-    window.renderFriendRequestsOnly = function(){
-        const grid = document.getElementById("cameraRequestsGrid");
-        grid.innerHTML = "";
-
-        onValue(ref(db, `requests/${currentUser}`), (snapshot) => {
-            grid.innerHTML = "";
-            const requestsData = snapshot.val() || {};
-            const requestUsers = Object.keys(requestsData);
-
-            if(requestUsers.length === 0){
-                grid.innerHTML = `<div style="text-align:center; color:#aaa; font-size:13px; padding:20px; grid-column: 1/-1;">ไม่มีคำขอเป็นเพื่อนในขณะนี้</div>`;
-                return;
-            }
-
-            requestUsers.forEach(reqUser => {
-                get(child(ref(db), `users/${reqUser}`)).then((userSnap) => {
-                    const userData = userSnap.exists() ? userSnap.val() : {};
-                    const userAvatar = userData.avatar || DEFAULT_AVATAR;
-
-                    const card = document.createElement("div");
-                    card.className = "user-card";
-                    card.innerHTML = `
-                        <div class="user-info" onclick="viewUserProfile('${reqUser}')">
-                            <img src="${userAvatar}" class="user-avatar-img">
-                            <div class="user-details">
-                                <h4>${reqUser}</h4>
-                                <p>${userData.status || 'ส่งคำขอมาหาคุณ'}</p>
-                            </div>
-                        </div>
-                        <button class="btn-friend btn-accept" onclick="acceptFriendRequest('${reqUser}')">
-                            ✓ ยอมรับ
-                        </button>
-                    `;
-                    grid.appendChild(card);
-                });
-            });
-        }, { onlyOnce: true });
-    };
-
-    window.acceptFriendRequest = function(reqUser){
-        set(ref(db, `friends/${currentUser}/${reqUser}`), true);
-        set(ref(db, `friends/${reqUser}/${currentUser}`), true);
-        remove(ref(db, `requests/${currentUser}/${reqUser}`));
-        alert(`คุณและ ${reqUser} เป็นเพื่อนกันแล้ว!`);
-        renderFriendRequestsOnly();
+        });
     };
 
     function renderSidebarFriends(){
@@ -1050,7 +913,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
             const friendsData = snapshot.val();
 
             if(!friendsData){
-                list.innerHTML = `<div style="text-align:center; color:#aaa; font-size:13px; padding:20px;">ยังไม่มีเพื่อน<br>ไปที่หน้า "เพื่อน" หรือ "ค้นหาและแอด" ก่อนครับ</div>`;
+                list.innerHTML = `<div style="text-align:center; color:#aaa; font-size:13px; padding:20px;">ยังไม่มีเพื่อน<br>ไปที่หน้า "เพื่อน" เพื่อรับหรือส่งคำขอก่อนครับ</div>`;
                 return;
             }
 
@@ -1128,9 +991,12 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
             timestamp: Date.now()
         };
 
-        if(replyData) msgData.replyTo = replyData;
+        if(replyData){
+            msgData.replyTo = replyData;
+        }
 
         push(ref(db, `private_chats/${roomId}`), msgData);
+
         input.value = "";
         cancelReply();
     };
@@ -1173,7 +1039,9 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
                     timestamp: Date.now()
                 };
 
-                if(replyData) msgData.replyTo = replyData;
+                if(replyData){
+                    msgData.replyTo = replyData;
+                }
 
                 push(ref(db, `private_chats/${roomId}`), msgData);
                 cancelReply();
@@ -1227,19 +1095,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
                     `;
                 }
 
-                let contentHTML = "";
-                if(msg.image){
-                    contentHTML = `
-                        ${replyHTML}
-                        <div class="chat-msg-img-container">
-                            <img src="${msg.image}" class="chat-msg-img" onclick="openImageModal('${msg.image}')">
-                            <button class="download-img-btn" onclick="downloadImage('${msg.image}', 'chat-image_${msgId}.jpg')">⬇️ ดาวน์โหลด</button>
-                        </div>
-                    `;
-                } else {
-                    contentHTML = `${replyHTML}${msg.text}`;
-                }
-
+                let contentHTML = msg.image ? `${replyHTML}<img src="${msg.image}" class="chat-msg-img" onclick="openImageModal('${msg.image}')">` : `${replyHTML}${msg.text}`;
                 const safeTextForReply = msg.text ? msg.text.replace(/'/g, "\\'") : 'รูปภาพ';
 
                 row.innerHTML = `
@@ -1271,7 +1127,7 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
         const currentMenu = document.getElementById(`menu-${msgId}`);
         const isActive = currentMenu.classList.contains('active');
         closeAllMsgMenus();
-        if(!isActive) currentMenu.classList.add('active');
+        if(!isActive){ currentMenu.classList.add('active'); }
     };
 
     window.closeAllMsgMenus = function(){
@@ -1369,8 +1225,15 @@ nav a:hover, nav a.active{ color:#22c9ff; background:rgba(255,255,255,.05); }
 
     window.handleUpdateUsername = async function(){
         const newUsername = document.getElementById("newUsernameInput").value.trim();
-        if(!newUsername) { alert("กรุณากรอกชื่อใหม่ครับ"); return; }
-        if(newUsername === currentUser) { alert("นี่คือชื่อปัจจุบันของคุณอยู่แล้วครับ"); return; }
+        if(!newUsername) {
+            alert("กรุณากรอกชื่อใหม่ครับ");
+            return;
+        }
+
+        if(newUsername === currentUser) {
+            alert("นี่คือชื่อปัจจุบันของคุณอยู่แล้วครับ");
+            return;
+        }
 
         try {
             const nameSnap = await get(child(ref(db), `users/${newUsername}`));
